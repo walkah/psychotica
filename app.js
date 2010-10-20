@@ -4,6 +4,7 @@
 
 var express = require('express');
 var app = module.exports = express.createServer();
+var Activity = require('./models/activity');
 
 // Configuration
 
@@ -29,11 +30,26 @@ app.configure('production', function(){
 
 // Routes
 app.get('/', function(req, res){
-  res.render('index.haml', {
-    locals: {
-        title: 'Express'
-    }
-  });
+    Activity.find().all(function (docs) {
+        res.render('index', {
+            locals: {
+                title: 'psychoti.ca!', 
+                posts: docs}
+        });
+    });  
+});
+
+app.get('/activity/post', function(req, res) {
+    res.render('post', {locals: {title: 'New Post'}});
+});
+
+app.post('/activity/post', function(req, res) {
+    var a = new Activity();
+    a.body = req.body.body;
+
+    a.save(function () {
+        res.redirect('/');
+    });
 });
 
 // Only listen on $ node app.js
