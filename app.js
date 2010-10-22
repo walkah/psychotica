@@ -12,7 +12,7 @@ app.configure(function(){
     app.set('views', __dirname + '/views');
     app.use(express.bodyDecoder());
     app.use(express.methodOverride());
-    app.use(express.compiler({ src: __dirname + '/public', enable: ['less'] }));
+    app.use(express.compiler({ src: __dirname + '/public', enable: ['sass'] }));
     app.use(app.router);
     app.use(express.staticProvider(__dirname + '/public'));
 
@@ -29,12 +29,10 @@ app.configure('production', function(){
 });
 
 // Routes
-app.get('/', function(req, res){
-    Activity.find().all(function (docs) {
+app.get('/', function(req, res, next) {
+    Activity.find().sort([['created_at', 'descending']]).all(function(entries) {
         res.render('index', {
-            locals: {
-                title: 'psychoti.ca!', 
-                posts: docs}
+            locals: { posts: entries }
         });
     });  
 });
