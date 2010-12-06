@@ -1,5 +1,4 @@
-var mongoose = require('mongoose').Mongoose,
-    db = mongoose.connect('mongodb://localhost/psychotica');
+var mongoose = require('mongoose').Mongoose;
 
 mongoose.model('Activity', {
     collection: 'activity',
@@ -18,4 +17,6 @@ mongoose.model('Activity', {
     }
 });
 
-module.exports = db.model('Activity');
+exports.Activity = function(db) {
+    return db.model('Activity');
+}

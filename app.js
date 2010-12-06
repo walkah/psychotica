@@ -1,13 +1,16 @@
 /**
  * Psychoti.ca
  */
+require.paths.unshift('./node_modules');
 
 var express = require('express');
 var app = module.exports = express.createServer();
-var Activity = require('./models/activity');
+var mongoose = require('mongoose').Mongoose,
+db = mongoose.connect('mongodb://localhost/psychotica');
+
+var Activity = require('./models.js').Activity(db)
 
 // Configuration
-
 app.configure(function(){
     app.set('views', __dirname + '/views');
     app.use(express.bodyDecoder());
