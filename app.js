@@ -40,11 +40,11 @@ app.get('/', function(req, res, next) {
     });  
 });
 
-app.get('/activity/post', function(req, res) {
+app.get('/post', function(req, res) {
     res.render('post', {locals: {title: 'New Post'}});
 });
 
-app.post('/activity/post', function(req, res) {
+app.post('/post', function(req, res) {
     var a = new Activity();
     a.body = req.body.body;
 
