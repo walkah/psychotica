@@ -1,0 +1,10 @@
+p Welcome to #{title}
+form(action='/post', method="post")
+  div
+    textarea(name='object')
+  .form-buttons
+    input(type="submit", value="post")
+#activity
+  - each activity in activities
+    .activity
+      .body= activity.object

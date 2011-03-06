@@ -1,7 +1,0 @@
-#activity
-  - each post in posts
-    %div.post
-      %div.created_at= post.created_at
-      %div.post
-        %a{href: "/activity/" + post._id.toHexString()} link
-      %div.body= post.body

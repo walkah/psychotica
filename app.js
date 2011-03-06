@@ -1,26 +1,23 @@
 /**
- * Psychoti.ca
+ * Psychotica
  */
-require.paths.unshift('./node_modules');
 
 var express = require('express');
 var app = module.exports = express.createServer();
-var mongoose = require('mongoose').Mongoose,
-db = mongoose.connect('mongodb://localhost/psychotica');
+var mongoose = require('mongoose');
+mongoose.connect('mongodb://localhost/psychotica_test');
 
-var Activity = require('./models.js').Activity(db)
+require('./models');
 
 // Configuration
-app.configure(function(){
-    app.set('views', __dirname + '/views');
-    app.use(express.bodyDecoder());
-    app.use(express.methodOverride());
-    app.use(express.compiler({ src: __dirname + '/public', enable: ['sass'] }));
-    app.use(app.router);
-    app.use(express.staticProvider(__dirname + '/public'));
 
-    app.set('view engine', 'haml');
-    app.register('.haml', require('hamljs'));    
+app.configure(function(){
+  app.set('views', __dirname + '/views');
+  app.set('view engine', 'jade');
+  app.use(express.bodyParser());
+  app.use(express.methodOverride());
+  app.use(app.router);
+  app.use(express.static(__dirname + '/public'));
 });
 
 app.configure('development', function(){
@@ -32,29 +29,28 @@ app.configure('production', function(){
 });
 
 // Routes
-app.get('/', function(req, res, next) {
-    Activity.find().sort([['created_at', 'descending']]).all(function(entries) {
-        res.render('index', {
-            locals: { posts: entries }
-        });
-    });  
-});
 
-app.get('/post', function(req, res) {
-    res.render('post', {locals: {title: 'New Post'}});
+app.get('/', function(req, res) {
+  var Activity = mongoose.model('Activity');
+  Activity.find({}, function(err, docs) {
+    res.render('index', {
+      title: 'psychoti.ca',
+      activities: docs,
+    });
+  });
 });
 
 app.post('/post', function(req, res) {
-    var a = new Activity();
-    a.body = req.body.body;
-
-    a.save(function () {
-        res.redirect('/');
-    });
+  var Activity = mongoose.model('Activity');
+  var a = new Activity();
+  a.object = req.body.object;
+  a.type = 'post';
+  a.save(function() {
+    res.redirect('/');
+  });
 });
 
-// Only listen on $ node app.js
-
+// Start the server
 if (!module.parent) {
   app.listen(3000);
   console.log("Express server listening on port %d", app.address().port)

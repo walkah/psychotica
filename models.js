@@ -1,22 +1,11 @@
-var mongoose = require('mongoose').Mongoose;
+var mongoose = require('mongoose');
 
-mongoose.model('Activity', {
-    collection: 'activity',
+var Schema = mongoose.Schema
+  , ObjectId = Schema.ObjectId;
 
-    properties: [
-        'body',
-        'verb',
-        'created_at'
-    ],
-
-    methods: {
-        save: function (fn) {
-            this.created_at = new Date();
-            this.__super__(fn);
-        }
-    }
+var Activity = new Schema({
+  type   : String,
+  object : String,
 });
 
-exports.Activity = function(db) {
-    return db.model('Activity');
-}
+mongoose.model('Activity', Activity);

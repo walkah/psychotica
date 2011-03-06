@@ -1,9 +1,8 @@
 { "name": "psychotica",
   "version": "0.0.1",
   "dependencies" : {
-      "express" : ">=1.0.0",
+      "express" : ">=2.0.0beta",
       "mongoose" : "",
-      "hamljs" : "",
-      "sass" : ""
+      "jade" : ""
   }
 }
