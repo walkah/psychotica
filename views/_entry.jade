@@ -1,0 +1,6 @@
+article.activity.hentry
+  .type= activity.type
+  .object.entry-title.entry-content= activity.object
+  .link.bookmark
+    a(href="/activity/" + activity.id)
+      abbr.updated(title: activity.created_iso)= activity.created_ago

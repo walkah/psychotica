@@ -1,11 +1,15 @@
-!!!
-html
+!!! 5
+html(lang='en')
   head
     title= title
     link(rel='stylesheet', href='/stylesheets/style.css')
+    script(src='/javascripts/jquery.js')
   body
-    #header
-      h1= title
-    #content!= body
-    footer
-      &copy 2011 walkah
+    #container
+      #header
+        h1
+          a(href='/')= title
+      #content!= body
+      footer
+        &copy 2011 
+        a(href='http://walkah.net/') walkah

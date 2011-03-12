@@ -1,0 +1,9 @@
+form(action='/post', method="post")
+  div
+    .type
+      label post
+        input(type='radio', name='type', value='post', checked) 
+    .object
+      textarea(name='object')
+  .form-buttons
+    input(type="submit", value="post")

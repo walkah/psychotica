@@ -1,10 +1,5 @@
-p Welcome to #{title}
-form(action='/post', method="post")
-  div
-    textarea(name='object')
-  .form-buttons
-    input(type="submit", value="post")
-#activity
+- if (user) 
+  #postbox!= partial("postbox")
+#activities.hfeed
   - each activity in activities
-    .activity
-      .body= activity.object
+    != partial("entry", {object: activity, as: 'activity'})

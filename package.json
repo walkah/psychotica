@@ -1,8 +1,10 @@
 { "name": "psychotica",
   "version": "0.0.1",
   "dependencies" : {
-      "express" : ">=2.0.0beta",
-      "mongoose" : "",
-      "jade" : ""
-  }
+    "express" : ">=2.0.0beta",
+    "mongoose" : "",
+    "jade" : "",
+    "relative-date" : ""
+  },
+  "engines": { "node": ">= 0.4.1" }
 }
