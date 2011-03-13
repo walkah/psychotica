@@ -28,12 +28,10 @@ exports.authenticate = function(req, res) {
   auth(req.body.username, req.body.password, function(err, user) {
     if (user) {
       req.session.regenerate(function() {
-        console.log(user + ' logged in');
         req.session.user = user;
         res.redirect('/');
       });
     } else {
-      console.log('Bad login');
       res.redirect('/login');
     }
   });
