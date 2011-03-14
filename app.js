@@ -62,7 +62,7 @@ app.get('/activity/:id', function(req, res, next) {
       return next(new Error('Activity not found'));
     }
     res.render('activity', {
-      title: 'psychoti.ca',
+      title: settings.site_name,
       activity: doc,
       user: req.session.user,
     });
