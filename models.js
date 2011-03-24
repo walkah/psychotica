@@ -23,3 +23,18 @@ ActivitySchema.virtual('created_ago').get(function() {
 });
 
 mongoose.model('Activity', ActivitySchema);
+
+/**
+ * Profile schema
+ */
+var ProfileSchema = new Schema({
+  nickname  : { type: String, required: true , validate: /[A-Za-z]/ },
+  fullname  : String,
+  picture   : String,
+  bio       : String,
+  location  : String,
+  created_on : { type: Date, default: Date.now },
+  updated_on : { type: Date, default: Date.now }  
+});
+
+mongoose.model('Profile', ProfileSchema);

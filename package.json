@@ -4,7 +4,8 @@
     "express" : ">=2.0.0beta",
     "mongoose" : "",
     "jade" : "",
-    "relative-date" : ""
+    "relative-date" : "",
+    "twitter" : ""
   },
   "engines": { "node": ">= 0.4.1" }
 }

@@ -15,6 +15,14 @@ function auth(user, pass, fn) {
   }
 }
 
+exports.logged_in = function(req, res, next) { 
+  if (req.session.user) {
+    next();
+  } else {
+    next(new Error('Unauthorized'));
+  }
+};
+
 exports.login = function(req, res) { 
   if (req.session.user) {
     res.redirect('/');
@@ -42,3 +50,9 @@ exports.logout = function(req, res) {
     res.redirect('/');
   });  
 };
+
+exports.settings = function(req, res) {
+  res.render('settings', {
+    title: settings.site_name,
+  });
+}

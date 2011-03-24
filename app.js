@@ -31,16 +31,23 @@ app.configure('production', function(){
   app.use(express.errorHandler()); 
 });
 
+app.dynamicHelpers({
+  // currently logged in user (if any)
+  user: function(req, res) {
+    return req.session.user;
+  },
+});
+
 // Routes
 app.get('/', function(req, res) {
   var Activity = mongoose.model('Activity');
   var query = Activity.find();
   query.sort('created_on', -1);
+  query.limit(20);
   query.exec(function(err, docs) {
     res.render('index', {
       title: settings.site_name,
       activities: docs,
-      user: req.session.user,
     });
   });
 });
@@ -64,7 +71,6 @@ app.get('/activity/:id', function(req, res, next) {
     res.render('activity', {
       title: settings.site_name,
       activity: doc,
-      user: req.session.user,
     });
   });
 });
@@ -73,6 +79,8 @@ app.get('/activity/:id', function(req, res, next) {
 app.get('/login', user.login);
 app.post('/login', user.authenticate);
 app.get('/logout', user.logout);
+app.get('/settings', user.logged_in, user.settings);
+//app.post('/settings', user.save);
 
 // Start the server
 if (!module.parent) {
