@@ -80,7 +80,7 @@ app.get('/login', user.login);
 app.post('/login', user.authenticate);
 app.get('/logout', user.logout);
 app.get('/settings', user.logged_in, user.settings);
-//app.post('/settings', user.save);
+app.post('/settings', user.logged_in, user.save);
 
 // Start the server
 if (!module.parent) {

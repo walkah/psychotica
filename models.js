@@ -28,7 +28,8 @@ mongoose.model('Activity', ActivitySchema);
  * Profile schema
  */
 var ProfileSchema = new Schema({
-  nickname  : { type: String, required: true , validate: /[A-Za-z]/ },
+  nickname  : { type: String, required: true, validate: /[A-Za-z]/,
+                index: {unique: true, dropDups: true} },
   fullname  : String,
   picture   : String,
   bio       : String,

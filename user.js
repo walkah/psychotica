@@ -1,6 +1,7 @@
 // User functions
 var settings = require('./settings');
 var crypto = require('crypto');
+var mongoose = require('mongoose');
 
 function md5(str) {
   return crypto.createHash('md5').update(str).digest('hex');
@@ -52,7 +53,31 @@ exports.logout = function(req, res) {
 };
 
 exports.settings = function(req, res) {
-  res.render('settings', {
-    title: settings.site_name,
+  var Profile = mongoose.model('Profile');
+  Profile.findOne({'nickname' : settings.user }, function(err, profile) {
+    if (!profile) {
+      profile = new Profile({'nickname': settings.user});
+    }
+    console.log(profile);
+    res.render('settings', {
+      profile: profile,
+      title: settings.site_name,
+    });
+  });
+}
+
+exports.save = function(req, res) {
+  var Profile = mongoose.model('Profile');
+  Profile.findOne({'nickname': settings.user}, function(err, profile) {
+    if (!profile) {
+      profile = new Profile({'nickname': settings.user});
+    }
+    profile.fullname = req.body.fullname;
+    profile.bio = req.body.bio;
+    profile.location = req.body.location;
+    profile.updated_on = Date.now();
+    profile.save(function() {
+      res.redirect('/settings');
+    });
   });
 }
