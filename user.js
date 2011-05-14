@@ -58,7 +58,6 @@ exports.settings = function(req, res) {
     if (!profile) {
       profile = new Profile({'nickname': settings.user});
     }
-    console.log(profile);
     res.render('settings', {
       profile: profile,
       title: settings.site_name,
