@@ -35,7 +35,24 @@ var ProfileSchema = new Schema({
   bio       : String,
   location  : String,
   created_on : { type: Date, default: Date.now },
-  updated_on : { type: Date, default: Date.now }  
+  updated_on : { type: Date, default: Date.now },
+  user      : ObjectId
 });
 
 mongoose.model('Profile', ProfileSchema);
+
+/**
+ * User schema
+ */
+var UserSchema = new Schema({
+  username : { type: String, required: true, validate: /[A-Za-z]/,
+               index: {unique: true, dropDups: true} },
+  password : String,
+  twitter: { 
+    user_id : String,
+    username: String,
+    oauth_token: String,
+    oauth_token_secret: String
+  }
+});
+mongoose.model('User', UserSchema);

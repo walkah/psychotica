@@ -3,6 +3,9 @@
   "dependencies" : {
     "express" : ">=2.0.0beta",
     "express-resource" : "",
+    "oauth": "",
+    "connect": "",
+    "connect-auth" : "",
     "mongoose" : "",
     "jade" : "",
     "relative-date" : "",
