@@ -2,6 +2,7 @@
   "version": "0.0.1",
   "dependencies" : {
     "express" : ">=2.0.0beta",
+    "express-resource" : "",
     "mongoose" : "",
     "jade" : "",
     "relative-date" : "",
