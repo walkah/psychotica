@@ -2,7 +2,7 @@
  * Psychotica
  */
 var settings = require('./settings');
-var sys = require('sys');
+var sys = require('util');
 var express = require('express');
 var auth= require('connect-auth');
 var app = express.createServer();
