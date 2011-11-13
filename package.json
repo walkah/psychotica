@@ -8,7 +8,7 @@
     "connect-auth" : "",
     "mongoose" : "",
     "jade" : "",
-    "relative-date" : "",
+    "moment": "",
     "twitter" : ""
   },
   "engines": { "node": ">= 0.4.1" }

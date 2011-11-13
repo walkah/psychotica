@@ -1,5 +1,5 @@
 var mongoose = require('mongoose');
-var relativeDate = require('relative-date');
+var moment = require('moment');
 
 var Schema = mongoose.Schema
   , ObjectId = Schema.ObjectId;
@@ -19,7 +19,7 @@ ActivitySchema.virtual('created_iso').get(function() {
 });
 
 ActivitySchema.virtual('created_ago').get(function() {
-  return relativeDate(this.created_on);
+  return moment(this.created_on).fromNow();
 });
 
 mongoose.model('Activity', ActivitySchema);
