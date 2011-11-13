@@ -1,5 +1,4 @@
-- if (user) 
-  #postbox!= partial("postbox")
+#postbox!= partial("postbox")
 #activities.hfeed
   - each activity in activities
     != partial("entry", {object: activity, as: 'activity'})

@@ -9,13 +9,6 @@ html(lang='en')
       #header
         h1
           a(href='/')= title
-        - if (user)
-          nav
-            ul
-              li
-                a(href="/settings") settings
-              li
-                a(href="/logout") logout
       #content!= body
       footer
         &copy 2011 
