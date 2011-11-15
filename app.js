@@ -7,6 +7,8 @@ var app = module.exports = express.createServer();
 
 require('mongoose').connect(settings.db_url);
 
+require('express-resource');
+
 // Config
 app.set('views', __dirname + '/views');
 app.set('view engine', 'jade');
@@ -24,9 +26,8 @@ app.configure(function(){
 });
 
 // Routes
-require('./routes/site')(app);
-require('./routes/activity')(app);
-require('./routes/users')(app);
+app.resource(require('./routes/site'));
+app.resource('activity', require('./routes/activity'));
 
 // Start the server
 if (!module.parent) {
