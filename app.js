@@ -5,7 +5,7 @@ var settings = require('./settings');
 var express = require('express');
 var app = module.exports = express.createServer();
 
-require('mongoose').connect('mongodb://localhost/psychotica_test');
+require('mongoose').connect(settings.db_url);
 
 // Config
 app.set('views', __dirname + '/views');
