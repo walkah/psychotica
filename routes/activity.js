@@ -4,7 +4,7 @@ var Activity = require('../models/activity');
 
 exports.index = function(req, res) {
   var query = Activity.find();
-  query.sort('created_on', -1);
+  query.sort('published', -1);
   query.limit(20);
   query.exec(function(err, docs) {
     res.render('index', {
@@ -28,8 +28,8 @@ exports.show = function(req, res) {
 
 exports.create = function(req, res) {
   var a = new Activity();
-  a.object = req.body.object;
-  a.type = req.body.type;
+  a.content = req.body.content;
+  a.verb = req.body.verb;
   a.save(function() {
     res.redirect('/activity');
   });

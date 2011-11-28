@@ -4,23 +4,42 @@ var moment = require('moment');
 var Schema = mongoose.Schema
   , ObjectId = Schema.ObjectId;
 
-/**
- * Basic activity schema
- */
+// Object Schema
+var ObjectSchema = new Schema({
+  attachments  : String,
+  author       : ObjectId,
+  content      : String,
+  displayName  : String,
+  image        : String,
+  objectType   : String,
+  published    : { type: Date, default: Date.now },
+  summary      : String,
+  url          : String,
+  updated      : { type: Date, default: Date.now }
+});
+
+// Activity Schema
 var ActivitySchema = new Schema({
-  type       : String,
-  object     : String,
-  created_on : { type: Date, default: Date.now },
-  updated_on : { type: Date, default: Date.now }
+  actor      : ObjectId,
+  content    : String,
+  generator  : String,
+  icon       : String,
+  object     : [ObjectSchema],
+  provider   : String,
+  published  : { type: Date, default: Date.now },
+  target     : String,
+  title      : String,
+  url        : String,
+  updated    : { type: Date, default: Date.now },
+  verb       : String
 });
 
-ActivitySchema.virtual('created_iso').get(function() {
-  return this.created_on.toISOString();
+ActivitySchema.virtual('published_iso').get(function() {
+  return this.published.toISOString();
 });
 
-ActivitySchema.virtual('created_ago').get(function() {
-  return moment(this.created_on).fromNow();
+ActivitySchema.virtual('published_ago').get(function() {
+  return moment(this.published).fromNow();
 });
 
 module.exports = mongoose.model('Activity', ActivitySchema);
-
