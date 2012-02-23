@@ -11,13 +11,14 @@ html(lang='en')
         .container
           a.brand(href="/")= title
           - if (user)
-            ul.nav.pull-right
-              li.dropdown
-                a(href="#", class="dropdown-toggle", data-toggle="dropdown") #{user.email}
-                  b(class="caret")
-                ul.dropdown-menu
-                  li
-                    a(href="logout") logout
+            .navbar-collapse
+              ul.nav.pull-right
+                li.dropdown
+                  a(href="#", class="dropdown-toggle", data-toggle="dropdown") #{user.email}
+                    b(class="caret")
+                  ul.dropdown-menu
+                    li
+                      a(href="logout") logout
           - else
             ul.nav.pull-right
               li
@@ -26,9 +27,10 @@ html(lang='en')
                 img(src="https://browserid.org/i/sign_in_grey.png", id="browserid")
     .container
       .content!= body
+      hr
       footer
-        &copy 2011 
-        a(href='http://walkah.net/') walkah
+        p &copy 2012 
+          a(href='http://walkah.net/') walkah
     script(src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.0/jquery.min.js")
     script(src="https://browserid.org/include.js")
     script(src="/js/bootstrap.min.js")
