@@ -2,7 +2,6 @@ module.exports = {
   'site_name' : 'psychoti.ca', 
   'db_url' : 'mongodb://localhost/psychotica',
   'port' : 3000, // http port to run on
-  'user' : '', // username to use for auth
-  'pass' : '', // password to use for auth
   'secret' : '', // a super secret for salting hashes
+  'email' : '' // email address for site user
 }
