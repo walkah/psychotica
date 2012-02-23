@@ -5,11 +5,12 @@
     "express-resource" : "",
     "oauth": "",
     "connect": "",
-    "connect-auth" : "",
+    "passport": "",
+    "passport-browserid": "",
     "mongoose" : "",
     "jade" : "",
     "moment": "",
     "twitter" : ""
   },
-  "engines": { "node": ">= 0.4.1" }
+  "engines": { "node": ">= 0.6.0" }
 }

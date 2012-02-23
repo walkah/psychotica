@@ -10,9 +10,25 @@ html(lang='en')
       .navbar-inner
         .container
           a.brand(href="/")= title
+          - if (user)
+            ul.nav.pull-right
+              li.dropdown
+                a(href="#", class="dropdown-toggle", data-toggle="dropdown") welcome #{user.email}
+                  b(class="caret")
+                ul.dropdown-menu
+                  li
+                    a(href="logout") logout
+          - else
+            div.pull-right
+              form(method='post', action='/auth/browserid', style="display:none;")
+                input(type='text', name='assertion')
+              img(src="https://browserid.org/i/sign_in_grey.png", id="browserid")
     .container
       .content!= body
       footer
         &copy 2011 
         a(href='http://walkah.net/') walkah
-    script(src='/js/bootstrap.min.js')
+    script(src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.0/jquery.min.js")
+    script(src="https://browserid.org/include.js")
+    script(src="/js/bootstrap.min.js")
+    script(src="/js/psychotica.js")

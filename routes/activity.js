@@ -9,7 +9,8 @@ exports.index = function(req, res) {
   query.exec(function(err, docs) {
     res.render('index', {
       title: settings.site_name,
-      activities: docs
+      activities: docs,
+      user: req.user
     });
   });
 };
@@ -21,7 +22,8 @@ exports.show = function(req, res) {
     }
     res.render('activity', {
       title: settings.site_name,
-      activity: doc
+      activity: doc,
+      user: req.user
     });
   });
 };

@@ -1,8 +1,9 @@
-form(action='/activity', method="post")
-  div
-    .type
-      input(type='hidden', name='verb', value='post')
-    .content
-      textarea(name='content')
-  .form-buttons
-    input(type="submit", value="post")
+- if (user)
+  form(action='/activity', method="post")
+    div
+      .type
+        input(type='hidden', name='verb', value='post')
+      .content
+        textarea(name='content')
+    .form-buttons
+      input(type="submit", value="post", class="btn")

@@ -8,7 +8,8 @@ exports.index = function(req, res) {
   query.exec(function(err, docs) {
     res.render('index', {
       title: settings.site_name,
-      activities: docs
+      activities: docs,
+      user: req.user
     });
   });
 };

@@ -8,6 +8,27 @@ var app = module.exports = express.createServer();
 require('mongoose').connect(settings.db_url);
 
 require('express-resource');
+var passport = require('passport')
+  , BrowserIDStrategy = require('passport-browserid').Strategy;
+
+passport.serializeUser(function(user, done) {
+  done(null, user.email);
+});
+
+passport.deserializeUser(function(email, done) {
+  done(null, { email: email });
+});
+
+passport.use(new BrowserIDStrategy({
+    audience: 'http://0.0.0.0:3000'
+  },
+  function(email, done) {
+    console.log(email);
+    if (email == settings.email) {
+      return done(null, {email: email});
+    }
+  }
+));
 
 // Config
 app.set('views', __dirname + '/views');
@@ -20,14 +41,33 @@ app.configure(function(){
   app.use(express.methodOverride());
   app.use(express.cookieParser());
   app.use(express.session({ secret: settings.secret }));
+  app.use(passport.initialize());
+  app.use(passport.session());
   app.use(app.router);
   app.use(express.static(__dirname + '/public'));
   app.use(express.errorHandler({ dumpExceptions: true, showStack: true }));
 });
 
 // Routes
+app.get('/login', function(req, res){
+  res.render('login', { title: settings.site_name, user: req.user });
+});
+
+app.post(
+  '/auth/browserid', 
+  passport.authenticate('browserid', { failureRedirect: '/login' }),
+  function(req, res) {
+    res.redirect('/');
+  });
+
+app.get('/logout', function(req, res){
+  req.logout();
+  res.redirect('/');
+});
+
 app.resource(require('./routes/site'));
 app.resource('activity', require('./routes/activity'));
+
 
 // Start the server
 if (!module.parent) {
