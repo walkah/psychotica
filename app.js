@@ -32,5 +32,5 @@ app.resource('activity', require('./routes/activity'));
 // Start the server
 if (!module.parent) {
   app.listen(settings.port);
-  console.log("psychotica listening on port %d", app.address().port);
+  console.log("psychotica running at http://%s:%d", app.address().address, app.address().port);
 }
