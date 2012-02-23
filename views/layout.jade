@@ -13,16 +13,17 @@ html(lang='en')
           - if (user)
             ul.nav.pull-right
               li.dropdown
-                a(href="#", class="dropdown-toggle", data-toggle="dropdown") welcome #{user.email}
+                a(href="#", class="dropdown-toggle", data-toggle="dropdown") #{user.email}
                   b(class="caret")
                 ul.dropdown-menu
                   li
                     a(href="logout") logout
           - else
-            div.pull-right
-              form(method='post', action='/auth/browserid', style="display:none;")
-                input(type='text', name='assertion')
-              img(src="https://browserid.org/i/sign_in_grey.png", id="browserid")
+            ul.nav.pull-right
+              li
+                form(method='post', action='/auth/browserid', style="display:none;")
+                  input(type='text', name='assertion')
+                img(src="https://browserid.org/i/sign_in_grey.png", id="browserid")
     .container
       .content!= body
       footer
