@@ -5,7 +5,9 @@ var settings = require('./settings');
 var express = require('express');
 var app = module.exports = express.createServer();
 
-require('mongoose').connect(settings.db_url);
+var MongoStore = require('connect-mongodb');
+var mongoose = require('mongoose'); 
+mongoose.connect(settings.db_url);
 
 require('express-resource');
 var passport = require('passport')
@@ -40,7 +42,8 @@ app.configure(function(){
   app.use(express.bodyParser());
   app.use(express.methodOverride());
   app.use(express.cookieParser());
-  app.use(express.session({ secret: settings.secret }));
+  app.use(express.session({ secret: settings.secret, 
+                            store: new MongoStore({db: mongoose.connections[0].db}) }));
   app.use(passport.initialize());
   app.use(passport.session());
   app.use(app.router);

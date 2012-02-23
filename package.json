@@ -5,6 +5,7 @@
     "express-resource" : "",
     "oauth": "",
     "connect": "",
+    "connect-mongodb": "",
     "passport": "",
     "passport-browserid": "",
     "mongoose" : "",
