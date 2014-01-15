@@ -1,0 +1,9 @@
+{
+  "name": "psychotica",
+  "version": "0.0.1",
+  "dependencies": {
+    "angular": "~1.2.8",
+    "bootstrap": "~3.0.3",
+    "angular-bootstrap": "~0.10.0"
+  }
+}
