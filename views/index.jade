@@ -1,4 +1,5 @@
-#postbox!= partial("postbox")
-#activities.hfeed
-  - each activity in activities
-    != partial("entry", {object: activity, as: 'activity'})
+extends layout
+
+block content
+  h1= title
+  p Welcome to #{title}

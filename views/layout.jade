@@ -1,38 +1,7 @@
-!!! 5
-html(lang='en')
+doctype html
+html
   head
     title= title
-    meta(,name="viewport",content="width=device-width, initial-scale=1.0")
-    link(rel='stylesheet', href='/css/bootstrap.min.css')
-    link(rel='stylesheet', href='/css/style.css')
-    link(rel='stylesheet', href='/css/bootstrap-responsive.min.css')
+    link(rel='stylesheet', href='/stylesheets/style.css')
   body
-    .navbar.navbar-fixed-top
-      .navbar-inner
-        .container
-          a.brand(href="/")= title
-          - if (user)
-            .navbar-collapse
-              ul.nav.pull-right
-                li.dropdown
-                  a(href="#", class="dropdown-toggle", data-toggle="dropdown") #{user.email}
-                    b(class="caret")
-                  ul.dropdown-menu
-                    li
-                      a(href="logout") logout
-          - else
-            ul.nav.pull-right
-              li
-                form(method='post', action='/auth/browserid', style="display:none;")
-                  input(type='text', name='assertion')
-                img(src="https://browserid.org/i/sign_in_grey.png", id="browserid")
-    .container
-      .content!= body
-      hr
-      footer
-        p &copy 2012 
-          a(href='http://walkah.net/') walkah
-    script(src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.0/jquery.min.js")
-    script(src="https://browserid.org/include.js")
-    script(src="/js/bootstrap.min.js")
-    script(src="/js/psychotica.js")
+    block content

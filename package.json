@@ -1,17 +1,13 @@
-{ "name": "psychotica",
+{
+  "name": "application-name",
   "version": "0.0.1",
-  "dependencies" : {
-    "express" : ">=2.0.0beta",
-    "express-resource" : "",
-    "oauth": "",
-    "connect": "",
-    "connect-mongodb": "",
-    "passport": "",
-    "passport-browserid": "",
-    "mongoose" : "",
-    "jade" : "",
-    "moment": "",
-    "twitter" : ""
+  "private": true,
+  "scripts": {
+    "start": "node app.js"
   },
-  "engines": { "node": ">= 0.6.0" }
+  "dependencies": {
+    "express": "3.4.8",
+    "jade": "*",
+    "stylus": "*"
+  }
 }
